@@ -1,6 +1,11 @@
 ---
 # tasks file for ansible-awesome-cli
-#
 
-- name: cli.yml
-  ansible.builtin.import_tasks: cli.yml
+#- name: Zoxide install
+#ansible.builtin.import_tasks: zoxide.yml
+
+#- name: CLI apt
+#ansible.builtin.import_tasks: cli_apt.yml
+
+- name: CLI cargo
+  ansible.builtin.import_tasks: cli_cargo.yml

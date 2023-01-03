@@ -1,0 +1,19 @@
+# Install modern linux terminal commands
+---
+- name: Install command line tools via apt
+  become: true
+  block:
+    - name: Install fd, bat, ripgrep, tldr, fzf
+      ansible.builtin.apt:
+        state: present
+        pkg:
+          - fd-find
+          - bat
+          - ripgrep
+          - tldr
+          - fzf
+        update_cache: true
+        cache_valid_time: 3600
+      register: apt_res
+      retries: 5
+      until: apt_res is success

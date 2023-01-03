@@ -1,0 +1,68 @@
+# Install modern linux terminal commands
+---
+- name: Install cargo and cli via cargo
+  become: true
+  tags:
+    - rust
+  block:
+    - name: Check if cargo is installed
+      ansible.builtin.shell:
+        cmd: command -v cargo
+      register: cargo_exists
+      ignore_errors: true
+      changed_when: cargo_exists.rc != 0
+
+    - name: Debug
+      ansible.builtin.debug:
+        msg: "{{ cargo_exists.rc }}"
+
+    # - name: Exists cargo installer
+
+    - name: Install cargo
+      ansible.builtin.apt:
+        state: present
+        pkg:
+          - cargo
+        update_cache: true
+        cache_valid_time: 3600
+      when: cargo_exists.rc != 0
+      register: apt_res
+      retries: 5
+      until: apt_res is success
+
+          # - name: Download cargo installer
+      # ansible.builtin.get_url:
+        # url: https://sh.rustup.rs
+          # dest: /tmp/sh.rustup.rs
+          # mode: '0755'
+          # force: 'yes'
+          # when: cargo_exists.rc != 0
+
+        # - name: Install rust/cargo
+      # ansible.builtin.command:
+        # cmd: /tmp/sh.rustup.rs -y
+          # when: cargo_exists.rc != 0
+
+    - name: Check sd package installed
+      ansible.builtin.shell:
+        cmd: command -v sd
+      register: sd_exists
+      ignore_errors: true
+      changed_when: sd_exists.rc != 0
+
+    - name: Install sd package
+      ansible.builtin.shell:
+        cmd: cargo install sd
+      when: sd_exists.rc != 0
+
+    - name: Check sd package installed
+      ansible.builtin.shell:
+        cmd: command -v difftastic
+      register: difftastic_exists
+      ignore_errors: true
+      changed_when: difftastic_exists.rc != 0
+
+    - name: Install difftastic package
+      ansible.builtin.shell: cargo install difftastic
+
+    # must add ~/.cargo/bin to PATH

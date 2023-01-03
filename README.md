@@ -1,41 +1,71 @@
-![yamllint](https://github.com/cschindlbeck/ansible-awesome-cli/actions/workflows/yaml-lint.yml/badge.svg)
+![ansiblelint](https://github.com/cschindlbeck/ansible-awesome-cli/actions/workflows/ansible-lint.yml/badge.svg)
 
-
-Role Name
+Ansible Awesome CLI Role
 =========
 
-A brief description of the role goes here.
+Installs awesome modern cli tools that replace old legacy cli tools. Improves speed and usability.
+
+|Tool|Description|Replaces/Enhances|
+|---|---|---|
+|[fzf](https://github.com/junegunn/fzf)| Fuzzy finder|CTRL-R|
+|[Zoxide](https://github.com/ajeetdsouza/zoxide)|Smart cd|cd|
+|[Ripgrep](https://github.com/BurntSushi/ripgrep) |Recursive fuzzy search| grep|
+|[Fd](https://github.com/sharkdp/fd)|Find entries in filesystem|find|
+|[bat](https://github.com/sharkdp/bat)|cat with syntax highlighting |cat|
+|[tldr](https://github.com/tldr-pages/tldr)| simpler, more approachable complement to traditional man pages|man|
+|[sd](https://github.com/chmln/sd)|Find and replace|sed|
+
+TODO: 
+- cargo install
+- sd
+- fd
+- difftastic
+- fzf
+
+Tested on Ubuntu 20.04 and 22.04
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+cargo?
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+None
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+cargo?
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+Add this to your requirements.txt:
 
-    - hosts: servers
+```yaml
+- name: ansible-awesome-cli
+  src: https://github.com/cschindlbeck/ansible-awesome-cli.git
+  version: v0.0.1
+  scm: git
+```
+
+and install it via 
+
+```sh 
+ansible-galaxy install -r requirements.txt
+```
+
+Include the role then as such:
+
+```yaml
+    - hosts: all
       roles:
-         - { role: username.rolename, x: 42 }
+         - ansible-awesome-cli
+```
 
 License
 -------
 
-BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+MIT

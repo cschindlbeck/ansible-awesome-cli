@@ -1,0 +1,18 @@
+---
+- name: Install command line tools
+  become: true
+  block:
+    - name: Download zoxide installer
+      ansible.builtin.get_url:
+        url: https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh
+        dest: /tmp/zoxide-install.sh
+        mode: 0755
+
+    - name: Execute the zoxide-install.sh
+      ansible.builtin.command: /tmp/zoxide-install.sh
+      changed_when: false
+
+    - name: Remove the zoxide-install.sh
+      ansible.builtin.file:
+        path: /tmp/zoxide-install.sh
+        state: absent
