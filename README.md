@@ -1,3 +1,6 @@
+![yamllint](https://github.com/cschindlbeck/ansible-awesome-cli/actions/workflows/yaml-lint.yml/badge.svg)
+
+
 Role Name
 =========
 
