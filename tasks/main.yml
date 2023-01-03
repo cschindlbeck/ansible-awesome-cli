@@ -1,8 +1,6 @@
 ---
 # tasks file for ansible-awesome-cli
+#
 
-- name: Touch a file, using symbolic modes to set the permissions (equivalent to 0644)
-  ansible.builtin.file:
-    path: /home/{{ ansible_env.USER }}/foo.conf
-    state: touch
-    mode: u=rw,g=r,o=r
+- name: cli.yml
+  ansible.builtin.import_tasks: cli.yml
